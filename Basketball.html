@@ -40,6 +40,19 @@
 
     document.querySelector('meta[name="viewport"]').setAttribute('content', 'width='+siteWidth+', initial-scale='+scale+'');
     setInterval(() => {
+        fetch("{{ url_for('reloaded') }}")
+        .then(response => {
+                response.text().then(t => {i = t})
+                console.log(i)
+                if (i === "True") {
+                    window.location.replace("{{ url_for('index') }}");
+                    console.log("yes")
+                }else{
+                    console.log("no")
+                }
+            });
+        }, 1000); 
+    setInterval(() => {
         fetch("{{ url_for('cfs_score') }}")
         .then(response => {
                 response.text().then(t => {cfs_score.innerHTML = t})
